@@ -3,11 +3,8 @@ name: CI - Build and Release
 on:
   push:
     branches: [ main ]
-    # Also build on tag pushes (so pushing a tag will trigger a build)
+    # Also build on tag pushes
     tags: ['*']
-  # Also run when a release is created/published in the UI so we can attach artifacts
-  release:
-    types: [created, published]
 
 jobs:
   build-and-release:
@@ -39,30 +36,32 @@ jobs:
       - name: Build
         run: ./gradlew build --no-daemon
 
-      - name: Determine release tag
-        id: determine_tag
+      - name: Determine version and tag
+        id: version
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          # Check if this is a tag push or a main branch push
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            TAG=$(echo "${{ github.ref }}" | sed 's|refs/tags/||')
           else
-            # For push events, extract tag name from GITHUB_REF (refs/tags/<tag>)
-            ref="${GITHUB_REF##*/}"
-            echo "TAG=$ref" >> $GITHUB_OUTPUT
+            # Main branch push: auto-increment version
+            CURRENT_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "1.0.0")
+            # Remove v prefix if present
+            CURRENT_TAG="${CURRENT_TAG#v}"
+            # Split version into major.minor.patch
+            IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_TAG"
+            # Increment patch version
+            PATCH=$((PATCH + 1))
+            TAG="$MAJOR.$MINOR.$PATCH"
           fi
-
-      - name: Upload built jars as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: jars
-          path: build/libs/*.jar
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+          echo "Determined tag: $TAG"
 
       - name: Create GitHub Release and upload jars
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ steps.determine_tag.outputs.TAG }}
-          name: Release ${{ steps.determine_tag.outputs.TAG }}
+          tag_name: ${{ steps.version.outputs.TAG }}
+          name: Release ${{ steps.version.outputs.TAG }}
           body: |
-            Automated release for tag ${{ steps.determine_tag.outputs.TAG }}.
-            Commit: ${{ github.sha }}
-          artifacts: jars
+            Built from commit ${{ github.sha }}.
+          files: build/libs/*.jar
           token: ${{ secrets.GITHUB_TOKEN }}
