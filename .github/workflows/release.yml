@@ -3,6 +3,11 @@ name: CI - Build and Release
 on:
   push:
     branches: [ main ]
+    # Also build on tag pushes (so pushing a tag will trigger a build)
+    tags: ['*']
+  # Also run when a release is created/published in the UI so we can attach artifacts
+  release:
+    types: [created, published]
 
 jobs:
   build-and-release:
@@ -34,6 +39,17 @@ jobs:
       - name: Build
         run: ./gradlew build --no-daemon
 
+      - name: Determine release tag
+        id: determine_tag
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          else
+            # For push events, extract tag name from GITHUB_REF (refs/tags/<tag>)
+            ref="${GITHUB_REF##*/}"
+            echo "TAG=$ref" >> $GITHUB_OUTPUT
+          fi
+
       - name: Upload built jars as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -43,10 +59,10 @@ jobs:
       - name: Create GitHub Release and upload jars
         uses: ncipollo/release-action@v1
         with:
-          tag: v${{ github.run_number }}-${{ github.sha }}
-          name: Release ${{ github.run_number }}
+          tag: ${{ steps.determine_tag.outputs.TAG }}
+          name: Release ${{ steps.determine_tag.outputs.TAG }}
           body: |
-            Automated release from push to `main`.
+            Automated release for tag ${{ steps.determine_tag.outputs.TAG }}.
             Commit: ${{ github.sha }}
           artifacts: jars
           token: ${{ secrets.GITHUB_TOKEN }}
