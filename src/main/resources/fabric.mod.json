@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "ftbloader",
+	"version": "${version}",
+	"name": "FTBLoader",
+	"description": "FTBLoader ensures the presence of FTB mods (FTB Library, FTB Claims, and FTB Teams) in your modpack. If any of these mods are missing, a warning screen will be displayed before entering the main menu, providing download links for the missing mods.",
+	"authors": [
+		"Jeff53978"
+	],
+	"contact": {},
+	"license": "MIT",
+	"icon": "assets/ftbloader/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"ftbloader.FTBLoaderClient"
+		],
+		"modmenu": [
+			"ftbloader.FTBLoaderClient"
+		]
+	},
+	"mixins": [
+		"ftbloader.mixins.json",
+		{
+			"config": "ftbloader.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.1",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"ftblibrary": "*",
+		"ftbchunks": "*",
+		"ftbteams": "*"
+	}
+}

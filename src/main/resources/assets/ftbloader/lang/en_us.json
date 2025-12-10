@@ -1,0 +1,17 @@
+{
+  "text.autoconfig.ftbloader.title": "FTBLoader Config",
+  "text.autoconfig.ftbloader.option.library": "Check for FTB Library",
+  "text.autoconfig.ftbloader.option.library.@Tooltip": "Enable to check if FTB Library is installed",
+  "text.autoconfig.ftbloader.option.claims": "Check for FTB Claims",
+  "text.autoconfig.ftbloader.option.claims.@Tooltip": "Enable to check if FTB Claims is installed",
+  "text.autoconfig.ftbloader.option.teams": "Check for FTB Teams",
+  "text.autoconfig.ftbloader.option.teams.@Tooltip": "Enable to check if FTB Teams is installed",
+  "text.autoconfig.ftbloader.option.versions": "Mod Versions",
+  "text.autoconfig.ftbloader.option.versions.@Tooltip": "CurseForge file IDs for each mod",
+  "text.autoconfig.ftbloader.option.versions.libraryVersion": "FTB Library Version",
+  "text.autoconfig.ftbloader.option.versions.libraryVersion.@Tooltip": "CurseForge file ID for FTB Library",
+  "text.autoconfig.ftbloader.option.versions.claimsVersion": "FTB Claims Version",
+  "text.autoconfig.ftbloader.option.versions.claimsVersion.@Tooltip": "CurseForge file ID for FTB Claims",
+  "text.autoconfig.ftbloader.option.versions.teamsVersion": "FTB Teams Version",
+  "text.autoconfig.ftbloader.option.versions.teamsVersion.@Tooltip": "CurseForge file ID for FTB Teams"
+}

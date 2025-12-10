@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .gradle
 **/build/
 !src/**/build/
@@ -19,3 +20,63 @@ gradle-app.setting
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+=======
+/.gradle
+/build
+/out
+/tmp
+/logs
+.idea
+.vscode
+*.iml
+*.class
+*.log
+*.tmp
+.DS_Store
+/.settings
+/.classpath
+/.project
+
+# gradle wrapper
+/gradle/wrapper/gradle-wrapper.properties
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# eclipse
+
+*.launch
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macos
+
+*.DS_Store
+
+# fabric
+
+run/
+
+# java
+
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
+>>>>>>> f549414 (chore: initial commit (add CI, .gitignore, README))
