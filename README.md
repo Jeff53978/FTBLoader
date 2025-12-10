@@ -119,4 +119,5 @@ MIT — see [LICENSE](LICENSE).
 
 ---
 
-For questions or issues, open a GitHub issue or contact the maintainer.
+For questions or issues, open a GitHub issue or contact the maintainer
+    
