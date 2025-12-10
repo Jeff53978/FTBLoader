@@ -1,3 +1,5 @@
+# Common ignores for Gradle/Java projects
+
 # Gradle
 .gradle/
 build/
@@ -30,5 +32,5 @@ replay_*.log
 *.hprof
 *.jfr
 
-# Keep Gradle wrapper files committed (required for CI)
-# Do NOT ignore gradle/wrapper/gradle-wrapper.properties or gradlew
+# Keep Gradle wrapper files committed for CI
+# (do NOT ignore gradle/wrapper/gradle-wrapper.properties or gradlew)
