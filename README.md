@@ -6,3 +6,7 @@ How the pipeline works:
 - On `push` to `main`, CI runs on `ubuntu-latest`.
 - Java 17 (Temurin) is used.
 - `./gradlew build` runs and built jars in `build/libs/` are uploaded to a GitHub Release.
+
+Next steps after local init:
+- Add a remote: `git remote add origin <your-repo-url>`
+- Push: `git push -u origin main`

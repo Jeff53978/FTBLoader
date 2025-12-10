@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 # Auto detect text files and perform LF normalization
 * text=auto
-=======
-#
-# https://help.github.com/articles/dealing-with-line-endings/
-#
-# Linux start script should use lf
-/gradlew        text eol=lf
 
-# These are Windows script files and should use crlf
-*.bat           text eol=crlf
+# Ensure Unix shell script uses LF
+/gradlew text eol=lf
+*.sh text eol=lf
 
->>>>>>> f549414 (chore: initial commit (add CI, .gitignore, README))
+# Ensure Windows batch files use CRLF
+*.bat text eol=crlf
