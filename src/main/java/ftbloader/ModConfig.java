@@ -10,6 +10,10 @@ public class ModConfig implements ConfigData {
     public boolean claims = true;
     public boolean teams = true;
 
+    public String ftbLibraryURL = "configure_first";
+    public String ftbChunksURL = "configure_first";
+    public String ftbTeamsURL = "configure_first";
+
     @ConfigEntry.Gui.CollapsibleObject
     Versions versions = new Versions();
 
