@@ -105,13 +105,13 @@ public class MissingModsScreen extends Screen {
         Map<String, String> mods = new HashMap<>();
 
         if (FTBLoaderClient.CONFIG.library && !FabricLoader.getInstance().isModLoaded("ftblibrary"))
-            mods.put("FTB Library", "https://mediafilez.forgecdn.net/files/7260/615/" + FTBLoaderClient.CONFIG.versions.libraryVersion);
+            mods.put("FTB Library", FTBLoaderClient.CONFIG.ftbLibraryURL.ftbLibraryURL());
 
         if (FTBLoaderClient.CONFIG.claims && !FabricLoader.getInstance().isModLoaded("ftbchunks"))
-            mods.put("FTB Chunks", "https://mediafilez.forgecdn.net/files/7157/144/" + FTBLoaderClient.CONFIG.versions.claimsVersion);
+            mods.put("FTB Chunks", FTBLoaderClient.CONFIG.ftbLibraryURL.ftbLibraryURL());
 
         if (FTBLoaderClient.CONFIG.teams && !FabricLoader.getInstance().isModLoaded("ftbteams"))
-            mods.put("FTB Teams", "https://mediafilez.forgecdn.net/files/7209/617/" + FTBLoaderClient.CONFIG.versions.teamsVersion);
+            mods.put("FTB Teams", FTBLoaderClient.CONFIG.ftbLibraryURL.ftbLibraryURL());
 
         return mods;
     }
